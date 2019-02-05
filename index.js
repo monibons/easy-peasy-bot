@@ -75,34 +75,69 @@ controller.on('rtm_close', function (bot) {
     // you may want to attempt to re-open
 });
 
-
-/**
- * Core bot logic goes here!
- */
-// BEGIN EDITING HERE!
-
 controller.on('bot_channel_join', function (bot, message) {
-    bot.reply(message, "I'm here!")
+    bot.reply(message, "Hey Team! Ask me design questions!")
 });
 
-controller.hears('hello', 'direct_message', function (bot, message) {
-    bot.reply(message, 'Hello!');
+controller.hears(['hey dahlia'], ['direct_mention', 'mention', 'direct_message'], function(bot,message) {
+  controller.storage.users.get(message.user, function(err, user) {
+     if (user && user.name) {
+         bot.reply(message, 'Hello ' + user.name + '!!');
+     } else {
+         bot.reply(message, 'Heyyyy 👋🏻');
+     }
+ });
+ });
+
+controller.hears(['dahlia', 'what are you?'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '`@ds-dahlia` #EC0041');
 });
 
-
-/**
- * AN example of what could be:
- * Any un-handled direct mention gets a reaction and a pat response!
- */
-//controller.on('direct_message,mention,direct_mention', function (bot, message) {
-//    bot.api.reactions.add({
-//        timestamp: message.ts,
-//        channel: message.channel,
-//        name: 'robot_face',
-//    }, function (err) {
-//        if (err) {
-//            console.log(err)
-//        }
-//        bot.reply(message, 'I heard you loud and clear boss.');
-//    });
-//});
+controller.hears(['fog'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '`@ds-fog`#D8DDE6');
+});
+controller.hears(['midnight'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '`@ds-midnight` #475470');
+});
+controller.hears(['abyss'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '`@ds-abyss` #2F3542');
+});
+controller.hears(['blue'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '`@ds-blue` #0A75E3');
+});
+controller.hears(['what are our primary colors?'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '`@ds-dahlia` #EC0041 | `@ds-fog` #D8DDE6 | `@ds-midnight` #475470 | `@ds-abyss` #2F3542');
+});
+controller.hears(['what are our status colors?'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '`@ds-red` #FF0000 | `@ds-orange` #FFBA43 | `@ds-green` #0AAC29');
+});
+controller.hears(['who is on the design team?'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, 'Monica Parra, Nicole Boettcher, John Kreitlow, Kim Hart, Christina Vu, Jane Ngo');
+});
+controller.hears(['I need a designer'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '@monica @nicole @cvu @jngo @ahajnos');
+});
+controller.hears(['I need a front-end dev'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '@kim @jkreitlow @cdieter');
+});
+controller.hears(['show me icons'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, 'https://design.jwplayer.com/docs/#/patterns/iconography');
+});
+controller.hears(['take me to neverland'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '🧚🏻‍♂️ https://design.jwplayer.com');
+});
+controller.hears(['make me a design ticket'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, 'https://bit.ly/2G98uCt');
+});
+controller.hears(['where is smee?'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, ':smee: http://smee.longtailvideo.com/');
+});
+controller.hears(['take me to the simi-dash'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, '✨ http://simi-dash.longtailvideo.com/ ✨');
+});
+controller.hears(['where are the docs?'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, 'https://design.jwplayer.com/docs/#/');
+});
+controller.hears(['help'], ['mention', 'direct_message'], function(bot,message) {
+    bot.reply(message, 'These are my commands: \n `hey dahlia` \n `take me to neverland` \n `what are our primary colors?` \n `what are our status colors?` \n `who is on the design team?` \n `I need a designer` \n `I need a front-end dev` \n `make me a design ticket` \n `where is smee?` \n `take me to the simi-dash` \n `show me icons` \n `what are you?` \n `dahlia` \n `fog` \n `midnight` \n `abyss` \n `blue` \n `where are the docs?`');
+});
